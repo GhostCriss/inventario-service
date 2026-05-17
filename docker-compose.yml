@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  db-inventario-servicio:
+    image: mysql:8.0
+    container_name: mysql_inventario
+    environment:
+      MYSQL_ROOT_PASSWORD: clave_maestra_root
+      MYSQL_DATABASE: db_amazorg_inventario
+      MYSQL_USER: desarrollador
+      MYSQL_PASSWORD: password_seguro_123
+    ports:
+      - "3313:3306"
+    networks:
+      - red_interna_inventario
+    volumes:
+      - persistencia_db_inventario:/var/lib/mysql
+
+  workspace-java-inventario:
+    image: maven:3.9-eclipse-temurin-21
+    container_name: entorno_programacion_inventario
+    ports:
+      - "8087:8087"
+    depends_on:
+      - db-inventario-servicio
+    networks:
+      - red_interna_inventario
+    command: tail -f /dev/null
+    volumes:
+      - ./codigo-fuente:/app
+    working_dir: /app
+
+networks:
+  red_interna_inventario:
+
+volumes:
+  persistencia_db_inventario:
