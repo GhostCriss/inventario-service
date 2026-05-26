@@ -1,4 +1,4 @@
-package cl.duoc.backend_api.model;
+    package cl.duoc.backend_api.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
