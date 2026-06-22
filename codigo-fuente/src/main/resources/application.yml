@@ -1,0 +1,29 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: MS-INVENTARIO
+  datasource:
+    url: jdbc:mysql://mysql_inventario:3306/db_amazorg_inventario?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: desarrollador
+    password: password_seguro_123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 3000
+            readTimeout: 5000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
